@@ -11,11 +11,6 @@ class Counter:
         self.file = open(self.path, 'r')
 
     def countChars(self):
-        for ignore in self.ignore:
-            if ignore in self.path:
-                self.count = 0
-                self.isIgnored = True
-                return
         try:
             if self.countLines:
                 self.count = len(self.file.readlines())
@@ -39,6 +34,11 @@ class Counter:
 
     # open file, count chars, close file
     def analyze(self):
+        for ignore in self.ignore:
+            if ignore in self.path:
+                self.count = 0
+                self.isIgnored = True
+                return
         self.openFile()
         self.countChars()
         self.closeFile()
